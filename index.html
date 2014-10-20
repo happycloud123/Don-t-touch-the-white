@@ -23,12 +23,12 @@ box-sizing:border-box;
 </div>-->
 <div style="width:100%;height:100%;border:1px solid #000;position:relative;overflow:hidden">
 	<div id ="l" style="width:100%;height:1000%;position:absolute;bottom:0px">
-		<!--<div  style="width:100%;height:100%;background-color:#e1e1e1;">ÄãµÄ³É¼¨ÊÇ</div>-->
+		<!--<div  style="width:100%;height:100%;background-color:#e1e1e1;">ä½ çš„æˆç»©æ˜¯</div>-->
 	</div>
 	<div class="clock" style="z-index:1688;width:100px;height:50px;position:absolute;top:100px;left:100px;background-color:#e1e1e1;">0.000</div>
 </div>
 <script>
-//³õÊ¼»¯200¸ö°×¸ñ
+//åˆå§‹åŒ–200ä¸ªç™½æ ¼
 var html='<div class="item"></div>',
 	htmls='';
 for(n=0;n<200;n++){
@@ -37,10 +37,10 @@ for(n=0;n<200;n++){
 $("#l").append(htmls);
 $('input').click(function(){$(this).parent().css("display","none")})
 
-//ÉùÃ÷È«¾Ö±äÁ¿
+//å£°æ˜å…¨å±€å˜é‡
 var finished=false,randomNums=[];
 
-//Ëæ»ú²úÉú50¸öËæ»úÊıÑ¡×÷ºÚ¸ñ£¬È»ºóÎªÆä¼Óblack class
+//éšæœºäº§ç”Ÿ50ä¸ªéšæœºæ•°é€‰ä½œé»‘æ ¼ï¼Œç„¶åä¸ºå…¶åŠ black class
 for (var i=0;i<50;i++){
 	randomNums[i] = Math.floor(Math.random()*4+4*i);
 }
@@ -49,14 +49,15 @@ for(j=0;j<50;j++){
 	var num=randomNums[j];
 	$item.eq(num).addClass("black");
 }
-//ÎªµÚÒ»¸öºÚ¸ñ¼ÓÉÏ¿ªÊ¼ÎÄ×Ö
-$(".black").eq(49).html('<span style="color:#fff;text-align:center;font-size:20px;font-weight:bold;margin-top:100px;">¿ªÊ¼</span>')
+//ä¸ºç¬¬ä¸€ä¸ªé»‘æ ¼åŠ ä¸Šå¼€å§‹æ–‡å­—
+$(".black").eq(49).html('<span style="color:#fff;text-align:center;font-size:20px;font-weight:bold;margin-top:100px;">å¼€å§‹</span>')
 
-//ÎªºÚ¸ñ°ó¶¨ÊÂ¼ş
+//ä¸ºé»‘æ ¼ç»‘å®šäº‹ä»¶
 $('.black').eq(49).tap(function(){
 	startTime = Date.now();
 	timeout = setInterval(timer,35);
 });
+var wow = 1;
 $("#l").delegate('.black','touchstart',function(e){
 	var $black = $(".black");
 	if(e.target==$black.last()[0]){
@@ -64,73 +65,26 @@ $("#l").delegate('.black','touchstart',function(e){
 			clearInterval(timeout);
 		}
 		$black.last().removeClass("black");
-		$("#l").animate({bottom:'-=20%'},"fast");	
+		$("#list").css({
+			"transform":'translate3d(0,'+ (2*wow)+'%' + ',0)',
+			"-moz-transform":'-moz-translate3d(0,'+ (2*wow)+'%' + ',0)',
+			"-webkit-transform":'-webkit-translate3d(0,'+(2*wow)+'%' + ',0)'
+			
+		});
+		wow++;	
 	}
 })
 
-//¼ÆÊ±Æ÷
+//è®¡æ—¶å™¨
 function timer(){
 	endTime = Date.now();
 	spendTime = (endTime-startTime)/1000;
 	$('.clock').html(spendTime.toFixed(3));
 }
 
-
-
-/*var finished=false;
-//Ëæ»ú²úÉú50¸öËæ»úÊı£¬ÓÃÓÚÃ¿ĞĞÖ®¼äµÄÒ»¸öºÚÉ«·½¿é	
-var a=[];
-for (var i=0;i<50;i++){
-	a[i] = Math.floor(Math.random()*4+4*i);
-}
-for(j=0;j<8;j++){
-	var num=a[j];
-	$(".item").eq(num).addClass("black");
-}
-	
-	$(".item").click(function(e){
-		if(e.target==$(".black").last()[0]){
-			if(e.target==$(".black").eq(7)[0]){
-				startTime = Date.now();
-				timeout = setInterval(timer,35);	
-			}
-			if(e.target==$(".black").first()[0]){
-				finished=true;
-			}
-			$(".black").last().removeClass("black");
-			$("#l").animate({bottom:'-=200px'});
-		}else{
-			return;
-			//finished=true;
-			//alert("you lost");
-		}	
-	})
-    function timer(){
-			if(finished===true){
-				clearInterval(timeout);
-			}else{
-				 endTime = Date.now();
-				 nn = (endTime-startTime)/1000;
-					//n = ((n*1000+20).toFixed(3))/1000;
-					$('.clock').html(nn.toFixed(3));
-			}
-		};	
-/*$("#aa").click(function(){
-		$("#ww").css('display','block');
-		window.opener = window;
-		window.close() 
-     try {
-      var a=JSON.parse($("#ee").val());
-	  var jsonText = JSON.stringify(a,null,4);
-	  $("#ee").val(jsonText);
-     } catch (e) {
-     alert(e);
-	 
-}
-})  */
-//ÖØÀ´£¬ĞèÒª¶¨ÒåÒ»¸öÓÎÏ·¿ªÊ¼µÄÈë¿Ú
-//ÍË³ö
-//bestGrade¼ÇÂ¼×îºÃ³É¼¨
+//é‡æ¥ï¼Œéœ€è¦å®šä¹‰ä¸€ä¸ªæ¸¸æˆå¼€å§‹çš„å…¥å£
+//é€€å‡º
+//bestGradeè®°å½•æœ€å¥½æˆç»©
 </script>
 </body>
 </html>
